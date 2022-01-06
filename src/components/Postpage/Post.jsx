@@ -14,6 +14,7 @@ export default function Post() {
     function getMessage() {
         removeAllList();
         const local_url = url;
+        console.log(local_url);
         fetch(local_url, {
             method: 'GET',
         }).then (response => response.json())

@@ -1,1 +1,1 @@
-export let url = "my-worker.chunao.workers.dev";
+export let url = "https://my-worker.chunao.workers.dev";
