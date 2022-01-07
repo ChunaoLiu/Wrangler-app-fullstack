@@ -3,6 +3,8 @@ import { url } from "../globalConfig";
 
 export default function Post() {
 
+    // Removing all messages in the message box and prepare for refreshing
+
     function removeAllList() {
         var msgBoard = document.getElementById("messageBox");
         if (msgBoard.firstChild == null) return;
@@ -10,6 +12,9 @@ export default function Post() {
             msgBoard.removeChild(msgBoard.firstChild);
         }
     }
+
+    // using fetch to send a HTTP GET request for all messages, 
+    // and dynamically create HTML elements to display these messages
 
     function getMessage() {
         removeAllList();
@@ -20,6 +25,9 @@ export default function Post() {
         }).then (response => response.json())
         .then (data => {
             data.forEach( data => {
+                // If this is a large project, the message element should be written as a react component for future
+                // extendability and maintenance. Since this assignment isn't that large, 
+                // I decide to use the native HTML5 way to do it.
                 var message = document.createElement("div");
                 var title = document.createElement("h2");
                 var username = document.createElement("h3");
@@ -38,6 +46,10 @@ export default function Post() {
             })
         })
     }
+
+    // This function will read the content in the input boxes and send a HTTP POST request 
+    // to the backend worker instance and the info of a new post should be stored into the
+    // cloud CV storage. 
 
     function postMessage() {
         const title = document.getElementById("title").value;
@@ -76,7 +88,7 @@ export default function Post() {
                 }
             } else {
                 alert("post successful!");
-                document.getElementById("button_submit").onClick();
+                getMessage();
             }
         })
 
@@ -85,6 +97,7 @@ export default function Post() {
         content.innerHTML = "";
     }
 
+    // This is the actual HTML elements
     return (
         <div className="Post">
             <div className="left">
